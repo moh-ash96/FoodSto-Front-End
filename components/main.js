@@ -4,13 +4,26 @@ import { useState, useEffect } from "react"
 export default(
     function Main(){
 
-        const [data, setData] = useState([])
+        const placeholder = [
+            {
+                "id": 1,
+                "seller": 1,
+                "name": "Product",
+                "description": "Product",
+                "image": "https://lh3.googleusercontent.com/proxy/jcyOJc9D1Wcv9LEeBZNv-tXvuqJklcSjiSfNiobeTMkRjz2xhR1Qy4MP6tMpbEdBXxQV_fXbr_tTbjDmdyfWwssxxNgQ-PBWS0EIyk8xg05qzDTP4KCD_GMsF2tEXw8t",
+                "price": "0.00"
+            }
+        ]
+
+        const [data, setData] = useState(placeholder)
 
         async function getData(){
+            // Gets the data from the API
             const response = await axios.get('https://foodsto-api.herokuapp.com/api/v1/products/');
             return response
         }
         useEffect(async()=>{
+            // For Accessing the data
             const response = await getData()
             const { data } = response
             setData(data)
