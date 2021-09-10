@@ -4,7 +4,7 @@ import Main from '../components/main'
 
 export default function Home() {
   return (
-    <div className="bg-bcg">
+    <div className="bg-gradient-to-r from-bcg">
     <Head title='FoodSto'/>
     <Header/>
     <Main/>
