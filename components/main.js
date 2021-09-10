@@ -1,74 +1,38 @@
-import Image from "next/dist/client/image"
+import axios from 'axios'
+import { useState, useEffect } from "react"
 
 export default(
     function Main(){
-        
-        const data = [
-            {
-                "id": 1,
-                "seller": 1,
-                "name": "Milk",
-                "description": "Full Fat Milk",
-                "image": "https://i.dailymail.co.uk/1s/2019/03/30/15/11659042-0-image-a-2_1553961271996.jpg",
-                "price": "1.50"
-            },
-            {
-                "id": 1,
-                "seller": 1,
-                "name": "Milk",
-                "description": "Full Fat Milk",
-                "image": "https://i.dailymail.co.uk/1s/2019/03/30/15/11659042-0-image-a-2_1553961271996.jpg",
-                "price": "1.50"
-            },
-            {
-                "id": 1,
-                "seller": 1,
-                "name": "Milk",
-                "description": "Full Fat Milk",
-                "image": "https://i.dailymail.co.uk/1s/2019/03/30/15/11659042-0-image-a-2_1553961271996.jpg",
-                "price": "1.50"
-            },
-            {
-                "id": 1,
-                "seller": 1,
-                "name": "Milk",
-                "description": "Full Fat Milk",
-                "image": "https://i.dailymail.co.uk/1s/2019/03/30/15/11659042-0-image-a-2_1553961271996.jpg",
-                "price": "1.50"
-            },
-            {
-                "id": 1,
-                "seller": 1,
-                "name": "Milk",
-                "description": "Full Fat Milk",
-                "image": "https://i.dailymail.co.uk/1s/2019/03/30/15/11659042-0-image-a-2_1553961271996.jpg",
-                "price": "1.50"
-            },
-            {
-                "id": 1,
-                "seller": 1,
-                "name": "Milk",
-                "description": "Full Fat Milk",
-                "image": "https://i.dailymail.co.uk/1s/2019/03/30/15/11659042-0-image-a-2_1553961271996.jpg",
-                "price": "1.50"
-            },
-        ]
 
+        const [data, setData] = useState([])
+
+        async function getData(){
+            const response = await axios.get('https://foodsto-api.herokuapp.com/api/v1/products/');
+            return response
+        }
+        useEffect(async()=>{
+            const response = await getData()
+            const { data } = response
+            setData(data)
+        },[])
 
         return (
-            <main>
-                <h1>Our products</h1>
+            <main className="flex flex-col text-center">
+                <h1 className="mt-10 text-4xl">Our products</h1>
+                <div className="flex flex-wrap justify-center">
                 {
-                    data.map(product=>(<div>
-                        <img src={product.image}/>
+                    data.map(product=>(<div className="flex flex-col items-center p-3 mt-20 bg-white rounded-lg w-80 ml-11">
+                        <div className="flex items-center w-40 h-56">
+                        <img src={product.image} width="200px"/>
+                        </div>
                         <div>
-                            <h2>{product.name}</h2>
-                            <p>Description:<br/>{product.description}</p>
-                            <h3>Price: {product.price} JD</h3>
+                            <h2 className="mt-5 text-2xl">{product.name}</h2>
+                            <p className="ml-2 text-xs text-left">{product.description}</p>
+                            <h3 className="text-sm font-bold">{product.price} JD</h3>
                         </div>
                     </div>))
                 }
-
+                </div>
             </main>
         )
     }
