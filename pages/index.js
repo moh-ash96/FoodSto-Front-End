@@ -9,6 +9,7 @@ export default function Home() {
     <Head title='FoodSto'/>
     <Header/>
     <Main className="h-full mb-32"/>
+    <Footer/>
     </div>
   )
 }
