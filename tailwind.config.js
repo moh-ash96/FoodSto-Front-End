@@ -4,6 +4,9 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {},
+    colors: {
+      'bcg':'#E2F9EE'
+    },
   },
   variants: {
     extend: {},
